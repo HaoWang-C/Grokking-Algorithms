@@ -1,0 +1,20 @@
+1. 算法复杂度: log2(n)
+2. 有n个元素，那么最多需要的步数为log2(n)
+3. 必须是有序的数据
+4. python代码
+def binary_search(list1, item):
+    low = 0
+    high = len(list1) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+        guess = list1[mid]
+        if guess == item:
+            return mid
+        if guess > item:
+            high = mid
+        else:
+            low = mid
+
+    return '404 Not Found'
+    5. 大O表示法: 揭示 运行时间如何 随列表长度增加 而增加 的规律(此处的运行时间其实指操作数)
