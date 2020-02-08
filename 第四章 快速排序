@@ -1,0 +1,25 @@
+1. 分而治之(divide and conquer D&C)------一种著名的递归式问题解决方法
+
+2. 使用D&C方法的过程:
+        a.找出基线条件
+        b.把问题分解(缩小规模), 直到符合基线条件
+
+3. 编写涉及数组的递归函数时, 基线条件通常是数组为空或只包含一个元素
+
+4. 函数式编程: haskell语言 
+
+5. 快速排序:
+def quicksort(l1):
+    if len(l1) < 2:
+        return l1
+    else:
+        pivot = l1[0]
+        smaller = [i for i in l1[1:] if i <= pivot]
+        bigger = [i for i in l1[1:] if i > pivot]
+        return quicksort(smaller) + [pivot] + quicksort(bigger)
+
+print(quicksort([1, 4, 4, 5, 6, 2, 9, 5, 23, 46, 4, 12]))
+
+>>>[1, 2, 4, 4, 4, 5, 5, 6, 9, 12, 23, 46]
+
+6. 快速排序时间复杂度为O(n*logn)
