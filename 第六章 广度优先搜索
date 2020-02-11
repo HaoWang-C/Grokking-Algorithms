@@ -1,0 +1,66 @@
+1. 图算法——广度优先算法(breadth-first search, BFS)
+
+2. 解决最短路径的算法被称为广度优先算法
+
+3. 图模拟一种连接: 图由节点和边组成, 与一个节点直接相连的所有节点被称为邻居
+
+4. 队列(queue): 不可以随机访问队列中的元素, 队列只有两种操作:入队和出队
+    队列是一种先进先出(first in first out, FIFO)的数据结构, 栈是一种后进先出(last in first out, LIFO)的数据结构
+
+5. 实现图
+   用散列表来表示图, 具体为 将节点映射到所有邻居
+   代码
+   graph = {}
+   graph['you'] = ['alice', 'bob', 'claire']
+   graph['bob'] = ['anuj', 'peggy']
+   graph['alice'] = ['peggy']
+   graph['claire'] = ['thom', 'jonny']
+   graph['anuj'] = []
+   graph['peggy'] = []
+   graph['thom'] = []
+   graph['jonny'] = []
+
+6. 实现BFS算法
+    from collections import deque
+
+    graph = {}
+    graph['you'] = ['alice', 'bob', 'claire']
+    graph['bob'] = ['anuj', 'peggy']
+    graph['alice'] = ['peggy']
+    graph['claire'] = ['thom', 'jonny']
+    graph['anuj'] = []
+    graph['peggy'] = []
+    graph['thom'] = []
+    graph['jonny'] = []
+
+    def person_is_seller(name):
+        return name[-1] == 'm'
+
+    def BFS(name):
+        search_queue = deque()                        #创建一个队列
+        search_queue += graph[name]                   #将name的邻居加入到队列中
+        searched = []
+        while search_queue:
+            person = search_queue.popleft()           #抽取队列的第一个人
+            if person not in searched:                #判断是否已经搜查过
+                if person_is_seller(person):          #判断是否满足搜索条件
+                    print(person+' is the seller!')
+                    return True
+                else:
+                    search_queue += graph[person]     #将person的邻居加入到队列
+                    searched.append(person)
+        return False
+
+    if not BFS('bob'):
+        print('not found')
+
+7. 运行时间: O(人数 + 边数) / O(V + E), 其中V为顶点(vertice)数,E为边(edge)数 
+
+8. 拓扑排序: 如果任务B依赖于任务A, 在列表中B必须在A后面
+
+9. 树: 一种特殊的图, 其中没有往'之前'指的边(edge), 例如家谱
+
+10. 面临类似于寻找最短路径的问题, 可以尝试用图来建立模型, 再使用BFS来解决问题
+
+11. 有向图(directed graph)中的边(edge)带箭头
+    无向图(undirected graph)中的边不带箭头, 其中关系是双向的
