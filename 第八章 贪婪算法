@@ -1,0 +1,36 @@
+1. 贪婪算法: 每一步都选择局部最优解, 最终得到的就是全局最优解
+
+2. 近似算法: 优劣标准: 速度多快 / 近似解与最优解的相似程度
+
+3. 运行时间: O(n^2)
+
+4. NP完全问题: 需要计算所有的解, 并从中选出最小 / 最短的那个
+              例如集合覆盖问题 / 旅行商问题
+
+6. 代码
+    #所有需要包含的州
+    states_needed = {'mt', 'wa', 'or', 'id', 'nv', 'ut', 'az'}
+
+    #所有电台及其包含的州
+    stations = {}
+    stations['one'] = {'id', 'nv', 'ut'}
+    stations['two'] = {'wa', 'id', 'mt'}
+    stations['three'] = {'or', 'nv', 'ca'}
+    stations['four'] = {'nv', 'ut'}
+    stations['five'] = {'ca', 'az'}
+    final_station = set()
+
+    while states_needed:
+        best_station = None
+        best_station_covered = set()
+        # 选出局部最优解
+        for each_station, states in stations.items():
+            covered = states_needed & states                 #取 需要包含的州 和 每个电台包含的州 的交集
+            if len(covered) > len(best_station_covered):
+                best_station = each_station
+                best_station_covered = covered
+        #更新需要覆盖的州
+        states_needed -= best_station_covered
+        final_station.add(best_station)
+
+    print(final_station)
